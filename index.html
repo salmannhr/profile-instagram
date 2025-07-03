@@ -17,6 +17,20 @@
             align-items: center;
             justify-content: center;
         }
+        .profile-blur-bg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            /* Efek blur dan semi transparan */
+            background: rgba(255,255,255,0.10);
+            backdrop-filter: blur(12px);
+        }
         .profile-container {
             display: flex;
             flex-direction: column;
@@ -28,6 +42,8 @@
             border-radius: 24px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
             backdrop-filter: blur(6px);
+            position: relative;
+            z-index: 2;
         }
         .profile-pic {
             width: 150px;
@@ -82,43 +98,20 @@
     </style>
 </head>
 <body>
-    <!-- Input untuk upload background -->
-    <input type="file" id="bgInput" accept="image/*" style="margin-bottom:16px;"/>
-    <div class="profile-container">
-        <!-- Input untuk upload foto profil -->
-        <input type="file" id="profileInput" accept="image/*" style="margin-bottom:16px;"/>
-        <img id="profilePic" src="Images/profile-main.jpg" alt="Foto Profil" class="profile-pic">
-        <div class="profile-name">Salman Hary</div>
-        <div class="profile-desc">Penggemar One Piece & Web Developer</div>
-        <div class="social-links">
-            <a href="https://www.instagram.com/salman.hary/" target="_blank" class="instagram">Instagram</a>
-            <a href="x.html" target="_blank" class="twitter">X (Twitter)</a>
-            <a href="https://www.linkedin.com/in/salmannhr/" target="_blank" class="linkedin">LinkedIn</a>
+    <!-- Hapus input upload background dan upload foto profil -->
+    <div class="profile-blur-bg">
+        <div class="profile-container">
+            <img id="profilePic" src="Images/profile-main.jpg" alt="Foto Profil" class="profile-pic">
+            <div class="profile-name">Salman Hary</div>
+            <div class="profile-desc">Penggemar One Piece & Web Developer</div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/salman.hary/" target="_blank" class="instagram">Instagram</a>
+                <a href="x.html" target="_blank" class="twitter">X (Twitter)</a>
+                <a href="https://www.linkedin.com/in/salmannhr/" target="_blank" class="linkedin">LinkedIn</a>
+            </div>
         </div>
     </div>
     <div id="root"></div>
-    <script>
-        // Script untuk menampilkan foto profil yang diupload
-        const input = document.getElementById('profileInput');
-        const img = document.getElementById('profilePic');
-        input.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                img.src = URL.createObjectURL(file);
-            }
-        });
-
-        // Script untuk mengganti background dari file explorer
-        const bgInput = document.getElementById('bgInput');
-        bgInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const url = URL.createObjectURL(file);
-                document.body.style.background = `url('${url}') no-repeat center center fixed`;
-                document.body.style.backgroundSize = 'cover';
-            }
-        });
-    </script>
     <script src="src/App.js" type="module"></script>
 </body>
 </html>

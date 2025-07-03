@@ -83,11 +83,11 @@
 </head>
 <body>
     <!-- Input untuk upload background -->
-    <!-- <label class="bg-upload-label" for="bgInput">Ganti Background (One Piece):</label>
-    <input type="file" id="bgInput" accept="image/*" style="margin-bottom:16px;"/> -->
+    <label class="bg-upload-label" for="bgInput">Ganti Background (One Piece):</label>
+    <input type="file" id="bgInput" accept="image/*" style="margin-bottom:16px;"/>
     <div class="profile-container">
         <!-- Input untuk upload foto profil -->
-        <!-- <input type="file" id="profileInput" accept="image/*" style="margin-bottom:16px;"/> -->
+        <input type="file" id="profileInput" accept="image/*" style="margin-bottom:16px;"/>
         <img id="profilePic" src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Foto Profil" class="profile-pic">
         <div class="profile-name">Salman Hary</div>
         <div class="profile-desc">Penggemar One Piece & Web Developer</div>
@@ -100,25 +100,25 @@
     <div id="root"></div>
     <script>
         // Script untuk menampilkan foto profil yang diupload
-        // const input = document.getElementById('profileInput');
-        // const img = document.getElementById('profilePic');
-        // input.addEventListener('change', function(e) {
-        //     const file = e.target.files[0];
-        //     if (file) {
-        //         img.src = URL.createObjectURL(file);
-        //     }
-        // });
+        const input = document.getElementById('profileInput');
+        const img = document.getElementById('profilePic');
+        input.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                img.src = URL.createObjectURL(file);
+            }
+        });
 
         // Script untuk mengganti background dari file explorer
-        // const bgInput = document.getElementById('bgInput');
-        // bgInput.addEventListener('change', function(e) {
-        //     const file = e.target.files[0];
-        //     if (file) {
-        //         const url = URL.createObjectURL(file);
-        //         document.body.style.background = `url('${url}') no-repeat center center fixed`;
-        //         document.body.style.backgroundSize = 'cover';
-        //     }
-        // });
+        const bgInput = document.getElementById('bgInput');
+        bgInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                document.body.style.background = `url('${url}') no-repeat center center fixed`;
+                document.body.style.backgroundSize = 'cover';
+            }
+        });
     </script>
     <script src="src/App.js" type="module"></script>
 </body>

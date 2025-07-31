@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>X (Twitter)</title>
+    <title>Error - Halaman Tidak Tersedia</title>
     <style>
         body {
             display: flex;
@@ -10,12 +10,49 @@
             align-items: center;
             height: 100vh;
             font-family: sans-serif;
-            background: #000000;
+            background: #000;
             color: #fff;
+        }
+        .error-text {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.7s;
+            min-height: 2.5em;
         }
     </style>
 </head>
 <body>
-    <h1>gada</h1>
+    <div class="error-text" id="errorText"></div>
+    <script>
+        const messages = [
+            "Halaman Tidak Tersedia",
+            "Maaf, halaman ini tidak dapat diakses.",
+            "Silakan kembali ke halaman utama.",
+            "Terima kasih telah berkunjung!"
+        ];
+        let i = 0;
+        const errorText = document.getElementById('errorText');
+
+        function showMessage(idx) {
+            errorText.style.opacity = 0;
+            setTimeout(() => {
+                errorText.textContent = messages[idx];
+                errorText.style.opacity = 1;
+            }, 400);
+        }
+
+        function loopMessages() {
+            for (let idx = 0; idx < messages.length; idx++) {
+                setTimeout(() => {
+                    showMessage(idx);
+                }, idx * 2200);
+            }
+            setTimeout(loopMessages, messages.length * 2200);
+        }
+
+        loopMessages();
+    </script>
 </body>
 </html>

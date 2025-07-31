@@ -5,54 +5,68 @@
     <title>Error - Halaman Tidak Tersedia</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            min-width: 100vw;
             background: #000;
             color: #fff;
+            font-family: sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        .error-spam {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
         }
         .error-text {
+            position: absolute;
+            color: #ff4444;
             font-size: 2rem;
             font-weight: bold;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.7s;
-            min-height: 2.5em;
+            opacity: 0.7;
+            user-select: none;
+            pointer-events: none;
+            text-shadow: 2px 2px 8px #000;
+            animation: shake 0.5s infinite alternate;
+        }
+        @keyframes shake {
+            from { transform: translate(0, 0);}
+            to { transform: translate(4px, -4px);}
         }
     </style>
 </head>
 <body>
-    <div class="error-text" id="errorText"></div>
+    <div class="error-spam" id="errorSpam"></div>
     <script>
-        const messages = [
-            "Halaman Tidak Tersedia",
-            "Maaf, halaman ini tidak dapat diakses.",
-            "Silakan kembali ke halaman utama.",
-            "Terima kasih telah berkunjung!"
-        ];
-        let i = 0;
-        const errorText = document.getElementById('errorText');
-
-        function showMessage(idx) {
-            errorText.style.opacity = 0;
-            setTimeout(() => {
-                errorText.textContent = messages[idx];
-                errorText.style.opacity = 1;
-            }, 400);
+        function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
-        function loopMessages() {
-            for (let idx = 0; idx < messages.length; idx++) {
-                setTimeout(() => {
-                    showMessage(idx);
-                }, idx * 2200);
+        function spamErrorText() {
+            const container = document.getElementById('errorSpam');
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            // Tambah 5 error text setiap 100ms
+            for (let i = 0; i < 5; i++) {
+                const div = document.createElement('div');
+                div.className = 'error-text';
+                div.textContent = 'ERORRRR';
+                div.style.left = randomInt(0, width - 180) + 'px';
+                div.style.top = randomInt(0, height - 40) + 'px';
+                div.style.fontSize = randomInt(18, 48) + 'px';
+                div.style.opacity = Math.random() * 0.6 + 0.4;
+                container.appendChild(div);
+                // Hapus setelah 2 detik agar tidak berat
+                setTimeout(() => div.remove(), 2000);
             }
-            setTimeout(loopMessages, messages.length * 2200);
         }
 
-        loopMessages();
+        setInterval(spamErrorText, 100);
     </script>
 </body>
 </html>
